@@ -2171,14 +2171,13 @@ end
 
 if text == 'السورس' or text == 'سورس' or text == 'يا سورس' then
 Text = [[
-┄─┅══┅─┄ 
-👋│Ahla bik fi suris milanu 😍
-                     ● ـ▬ـ▬ ja ۩۞۩ ja▬ ـ▬ـ ● 
-📡╿[Qinat alsuwris](t.me/i600ik) 
-⚜│[Qinat shuruhat alsuwris](t.me/SourcE_MILANo) 
-🤖│[But tuasil](t.me/p018bot) 
-👨🏻‍✈️╽[Mtwr alswrus](t.me/p018q) 
-                        ●ـ▬ــ▬ஜ۩۞۩ஜ▬ـ▬ـ●
+༯┆WELCOM BRO 💞 .
+⠠⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠠𖧧
+༯┆[Qinat alsuwris](t.me/i600ik) 
+༯┆[Qinat shuruhat alsuwris](t.me/SourcE_MILANo) 
+༯┆[But tuasil](t.me/p018bot) 
+⠠⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠠𖧧
+༯┆ [Mtwr alswrus](t.me/p018q)  
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
