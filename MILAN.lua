@@ -3938,29 +3938,15 @@ if text == 'مسح الادمنيه' and Manager(msg) then
 database:del(bot_id..'Mod:User'..msg.chat_id_)
 send(msg.chat_id_, msg.id_, '܁༯┆ تم مسح قائمة الادمنية 💞 ܰ')
 end
-if text == ("الادمنيه") then
-local list = database:smembers(bot_id..'Mod:User'..msg.chat_id_)
+if text == ("الادمنيه") and Manager(msg) then
+local list = database:smembers(bot_id.."Mod:User"..msg.chat_id_)
 t = "\n٭ 𖤓┆قائمة الادمنيه 💞💞◟\n܀⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤܀\n"
 for k,v in pairs(list) do
-local username = database:get(bot_id.."user:Name" .. v)
+local username = database:get(bot_id.."Tshake:User:Name" .. v)
 if username then
 t = t.."𖠵 "..k.." ◜[@"..username.."]◞ .\n"
 else
-end
-end
-if #list == 0 then
-t = "܁༯┆لايوجد ادمنيه 💞 ܰ"
-end
-send(msg.chat_id_, msg.id_, t)
-end
-if text == ("الادمنيه") then
-local list = database:smembers(bot_id..'Mod:User'..msg.chat_id_)
-t = "\n٭ 𖤓┆قائمة الادمنيه 💞💞◟\n܀⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤܀\n"
-for k,v in pairs(list) do
-local username = database:get(bot_id.."user:Name" .. v)
-if username then
-t = t.."𖠵 "..k.." ◜[@"..username.."]◞ .\n"
-else
+t = t..""..k.."- (`"..v.."`)\n"
 end
 end
 if #list == 0 then
@@ -6849,7 +6835,7 @@ local List = {
 └ 𝐈𝐃 𖤱 #id 𖦴 .
 ]],
 [[
-- 𓏬 𝐔𝐬𝐄𝐫 : #username 𓂅 .
+- 𓏬 𝐔??𝐄𝐫 : #username 𓂅 .
 - 𓏬 𝐌𝐬𝐆  : #msgs 𓂅 .
 - 𓏬 𝐒𝐭𝐀 : #stast 𓂅 .
 - 𓏬 𝐈𝐃 : #id 𓂅 .
