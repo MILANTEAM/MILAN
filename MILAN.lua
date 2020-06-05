@@ -4571,7 +4571,7 @@ database:sadd(bot_id..'Ban:User'..msg.chat_id_, userid)
 chat_kick(msg.chat_id_, userid)  
 tdcli_function ({ID = "GetUser",user_id_ = userid},function(arg,data) 
 if data.first_name_ then
-usertext = '\n👤┇ العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'Boyka_x')..')'
+usertext = '\n👤┇ العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'i600ik')..')'
 status  = '\n☑️┇ تم حظره من المجموعه'
 send(msg.chat_id_, msg.id_, usertext..status)
 else
@@ -4600,7 +4600,7 @@ return false
 end
 database:srem(bot_id..'Ban:User'..msg.chat_id_, result.sender_user_id_)
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,data) 
-usertext = '\n👤┇ العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'Boyka_x')..')'
+usertext = '\n👤┇ العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'i600ik')..')'
 status  = '\n📮┇ الايدي » `'..result.sender_user_id_..'`\n☑️┇ تم الغاء حظره من هنا'
 send(msg.chat_id_, msg.id_, usertext..status)
 end,nil)
@@ -4629,7 +4629,7 @@ return false
 end
 database:srem(bot_id..'Ban:User'..msg.chat_id_, result.id_)
 tdcli_function ({ ID = "ChangeChatMemberStatus", chat_id_ = msg.chat_id_, user_id_ = result.id_, status_ = { ID = "ChatMemberStatusLeft" },},function(arg,ban) end,nil)   
-usertext = '\n👤┇ العضو » ['..result.title_..'](t.me/'..(username or 'Boyka_x')..')'
+usertext = '\n👤┇ العضو » ['..result.title_..'](t.me/'..(username or 'i600ik')..')'
 status  = '\n☑️┇ تم الغاء حظره من هنا'
 texts = usertext..status
 else
@@ -4660,7 +4660,7 @@ database:srem(bot_id..'Ban:User'..msg.chat_id_, userid)
 tdcli_function ({ ID = "ChangeChatMemberStatus", chat_id_ = msg.chat_id_, user_id_ = userid, status_ = { ID = "ChatMemberStatusLeft" },},function(arg,ban) end,nil)   
 tdcli_function ({ID = "GetUser",user_id_ = userid},function(arg,data) 
 if data.first_name_ then
-usertext = '\n👤┇ العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'Boyka_x')..')'
+usertext = '\n👤┇ العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'i600ik')..')'
 status  = '\n☑️┇ تم الغاء حظره من هنا'
 send(msg.chat_id_, msg.id_, usertext..status)
 else
