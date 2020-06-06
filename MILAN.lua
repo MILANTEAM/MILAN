@@ -4965,7 +4965,7 @@ send(msg.chat_id_, msg.id_, '\n⚠| عذرا لا تستطيع طرد او حظ�
 else
 https.request("https://api.telegram.org/bot"..token.."/restrictChatMember?chat_id="..msg.chat_id_.."&user_id="..result.sender_user_id_)
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,data) 
-usertext = '\n👤| العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'BOBBW')..')'
+usertext = '\n👤| العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'i600ik')..')'
 status  = '\n📮| الايدي » `'..result.sender_user_id_..'`\n🔘| تم تقييده في المجموعه'
 send(msg.chat_id_, msg.id_, usertext..status)
 end,nil)
@@ -5002,7 +5002,7 @@ return false
 end      
 https.request("https://api.telegram.org/bot"..token.."/restrictChatMember?chat_id="..msg.chat_id_.."&user_id="..result.id_)
  
-usertext = '\n👤| العضو » ['..result.title_..'](t.me/'..(username or 'BOBBW')..')'
+usertext = '\n👤| العضو » ['..result.title_..'](t.me/'..(username or 'i600ik')..')'
 status  = '\n🔘| تم تقييده في المجموعه'
 texts = usertext..status
 else
@@ -5036,7 +5036,7 @@ if Can_or_NotCan(result.sender_user_id_, msg.chat_id_) then
 send(msg.chat_id_, msg.id_, "\n🔰| عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Rutba(result.sender_user_id_,msg.chat_id_).." )")
 else
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,data) 
-usertext = '\n👤| العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'BOBBW')..')'
+usertext = '\n👤| العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'i600ik')..')'
 status  = '\n☑| تم تقيده لمدة ~ { '..TextEnd[2]..' '..TextEnd[3]..'}'
 send(msg.chat_id_, msg.id_, usertext..status)
 end,nil)
@@ -5074,7 +5074,7 @@ TextEnd[3] = TextEnd[3]:gsub("يوم","ايام")
 if Can_or_NotCan(result.id_, msg.chat_id_) then
 send(msg.chat_id_, msg.id_, "\n⚠️| عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Rutba(result.id_,msg.chat_id_).." )")
 else
-usertext = '\n👤| العضو » ['..result.title_..'](t.me/'..(username or 'BOBBW')..')'
+usertext = '\n👤| العضو » ['..result.title_..'](t.me/'..(username or 'i600ik')..')'
 status  = '\n☑| تم تقيده لمدة ~ { '..TextEnd[2]..' '..TextEnd[3]..'}'
 texts = usertext..status
 send(msg.chat_id_, msg.id_,texts)
@@ -5107,7 +5107,7 @@ else
 https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" .. msg.chat_id_ .. "&user_id=" ..userid)
 tdcli_function ({ID = "GetUser",user_id_ = userid},function(arg,data) 
 if data.first_name_ then
-usertext = '\n👤| العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'BOBBW')..')'
+usertext = '\n👤| العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'i600ik')..')'
 status  = '\n🔘| تم تقييده في المجموعه'
 send(msg.chat_id_, msg.id_, usertext..status)
 else
@@ -5132,7 +5132,7 @@ end
 function start_function(extra, result, success)
 https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" .. msg.chat_id_ .. "&user_id=" .. result.sender_user_id_ .. "&can_send_messages=True&can_send_media_messages=True&can_send_other_messages=True&can_add_web_page_previews=True")
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,data) 
-usertext = '\n👤| العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'BOBBW')..')'
+usertext = '\n👤| العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'i600ik')..')'
 status  = '\n📮| الايدي » `'..result.sender_user_id_..'`\n🔘| تم الغاء تقييده'
 send(msg.chat_id_, msg.id_, usertext..status)
 end,nil)
@@ -5155,7 +5155,7 @@ end
 function start_function(extra, result, success)
 if result.id_ then
 https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" .. msg.chat_id_ .. "&user_id=" .. result.id_ .. "&can_send_messages=True&can_send_media_messages=True&can_send_other_messages=True&can_add_web_page_previews=True")
-usertext = '\n👤| العضو » ['..result.title_..'](t.me/'..(username or 'BOBBW')..')'
+usertext = '\n👤| العضو » ['..result.title_..'](t.me/'..(username or 'i600ik')..')'
 status  = '\n🔘| تم الغاء تقييده'
 texts = usertext..status
 else
@@ -5181,7 +5181,7 @@ end
 https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" .. msg.chat_id_ .. "&user_id=" ..userid.. "&can_send_messages=True&can_send_media_messages=True&can_send_other_messages=True&can_add_web_page_previews=True")
 tdcli_function ({ID = "GetUser",user_id_ = userid},function(arg,data) 
 if data.first_name_ then
-usertext = '\n👤| العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'BOBBW')..')'
+usertext = '\n👤| العضو » ['..data.first_name_..'](t.me/'..(data.username_ or 'i600ik')..')'
 status  = '\n🔘| تم الغاء تقييده'
 send(msg.chat_id_, msg.id_, usertext..status)
 else
@@ -5209,14 +5209,14 @@ database:srem(bot_id..'GBan:User',result.id_)
 database:srem(bot_id..'Ban:User'..msg.chat_id_,result.id_)
 database:srem(bot_id..'Muted:User'..msg.chat_id_,result.id_)
 database:srem(bot_id..'Gmute:User'..msg.chat_id_,result.id_)
-usertext = '\n👤|العضو » ['..result.title_..'](t.me/'..(username or 'BOBBW')..')'
+usertext = '\n👤|العضو » ['..result.title_..'](t.me/'..(username or 'i600ik')..')'
 status  = '\n🔘| تم الغاء القيود عنه'
 texts = usertext..status
 send(msg.chat_id_, msg.id_,texts)
 else
 database:srem(bot_id..'Ban:User'..msg.chat_id_,result.id_)
 database:srem(bot_id..'Muted:User'..msg.chat_id_,result.id_)
-usertext = '\n👤|العضو » ['..result.title_..'](t.me/'..(username or 'BOBBW')..')'
+usertext = '\n👤|العضو » ['..result.title_..'](t.me/'..(username or 'i600ik')..')'
 status  = '\n🔘| تم الغاء القيود عنه'
 texts = usertext..status
 send(msg.chat_id_, msg.id_,texts)
