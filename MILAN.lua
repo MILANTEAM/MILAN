@@ -6,7 +6,7 @@ JSON  = dofile("./library/dkjson.lua")
 URL = require('socket.url')  
 utf8 = require ('lua-utf8') 
 database = redis.connect('127.0.0.1', 6379) 
-id_server = 2342443
+id_server = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a')
 --------------------------------------------------------------------------------------------------------------
 local AutoSet = function() 
 local create = function(data, file, uglify)  
@@ -241,6 +241,8 @@ elseif database:sismember(bot_id..'Basic:Constructor'..chat_id, user_id) then
 var = true
 elseif database:sismember(bot_id..'Constructor'..chat_id, user_id) then
 var = true  
+elseif database:sismember(bot_id..'VVVZVV:MN:TF'..chat_id, user_id) then
+var = true  
 elseif database:sismember(bot_id..'Manager'..chat_id, user_id) then
 var = true  
 elseif database:sismember(bot_id..'Mod:User'..chat_id, user_id) then
@@ -274,6 +276,8 @@ elseif database:sismember(bot_id..'Constructor'..chat_id, user_id) then
 var = database:get(bot_id.."Constructor:Rd"..msg.chat_id_) or 'المنشئ'  
 elseif database:sismember(bot_id..'Manager'..chat_id, user_id) then
 var = database:get(bot_id.."Manager:Rd"..msg.chat_id_) or 'المدير'  
+elseif database:sismember(bot_id..'VVVZVV:MN:TF'..chat_id, user_id) then
+var = 'منظف' 
 elseif database:sismember(bot_id..'Mod:User'..chat_id, user_id) then
 var = database:get(bot_id.."Mod:Rd"..msg.chat_id_) or 'الادمن'  
 elseif database:sismember(bot_id..'Mamez:User', user_id) then
@@ -300,6 +304,14 @@ else
 Var = false
 end
 return Var
+end
+function cleaner(msg)
+local hash = database:sismember(bot_id.."VVVZVV:MN:TF"..msg.chat_id_,msg.sender_user_id_)    
+if hash or SudoBot(msg) or Sudo(msg) or BasicConstructor(msg) or CoSu(msg) then     
+return true    
+else    
+return false    
+end 
 end
 function Ban_User(Chat_id,User_id) 
 if database:sismember(bot_id..'Ban:User'..Chat_id,User_id) then
@@ -1507,11 +1519,20 @@ return false
 end
 end
 end
-if text and database:get(bot_id..'lock:Fars'..msg.chat_id_) and not Manager(msg) then 
+if text and database:get(bot_id..'lock:Engilsh'..msg.chat_id_) and not Manager(msg) then 
 list = {'a','u','y','l','t','b','A','Q','U','J','K','L','B','D','L','V','Z','k','n','c','r','q','o','z','I','j','m','M','w','d','h','e'}
 for k,v in pairs(list) do
 if string.find(text,v) ~= nil then
 DeleteMessage(msg.chat_id_,{[0] = msg.id_}) 
+return false
+end
+end
+end
+if text and redis:get(bot_id..'lock:Far'..msg.chat_id_) and not Vips(msg) then
+list = {"ڄ","گ","که","پی","خسته","برم","راحتی","بیام","بپوشم","گرمه","چه","چ","ڬ","ٺ","چ","ڇ","ڿ","ڀ","ڎ","ݫ","ژ","ڟ","ݜ","ڸ","پ","۴","زدن","دخترا","دیوث","مک","زدن"}
+for k,v in pairs(list) do
+if string.find(text,v) ~= nil then
+Delete_Message(msg.chat_id_,{[0] = msg.id_}) 
 return false
 end
 end
@@ -2327,8 +2348,13 @@ database:set(bot_id..'lock:Fshar'..msg.chat_id_,true)
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 send(msg.chat_id_, msg.id_,'┐ هلو بيك عمري ↝ ٭\n┤ تم قفل الفشار ↝ ٭\n┘ بواسطة ゠◞ *@'..data.username_..'* ◜  ✛ ٭')  
 end,nil) 
+elseif text == 'قفل الفارسيه' and msg.reply_to_message_id_ == 0 and Manager(msg) then 
+database:set(bot_id..'lock:Far'..msg.chat_id_,true) 
+tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
+send(msg.chat_id_, msg.id_,'܁༯┆ههلو عمري ↝ ܰ \n܁༯┆تم قفل الفارسيه ↝ ܰ ')  
+end,nil) 
 elseif text == 'قفل الانكليزيه' and msg.reply_to_message_id_ == 0 and Manager(msg) then 
-database:set(bot_id..'lock:Fars'..msg.chat_id_,true) 
+database:set(bot_id..'lock:Engilsh'..msg.chat_id_,true) 
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 send(msg.chat_id_, msg.id_,'܁༯┆ههلو عمري ↝ ܰ \n܁༯┆تم قفل الانكليزيه ↝ ܰ ')  
 end,nil)
@@ -2403,8 +2429,13 @@ database:del(bot_id..'lock:Fshar'..msg.chat_id_)
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 send(msg.chat_id_, msg.id_,'┐ هلو بيك عمري ↝ ٭\n┤ تم فتح الفشار ↝ ٭\n┘ بواسطة ゠◞ *@'..data.username_..'* ◜  ✛ ٭')  
 end,nil)
+elseif text == 'فتح الفارسيه' and msg.reply_to_message_id_ == 0 and Manager(msg) then 
+database:del(bot_id..'lock:Far'..msg.chat_id_) 
+tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
+send(msg.chat_id_, msg.id_,'܁༯┆ههلو عمري ↝ ܰ \n܁༯┆تم فتح الفارسيه ↝ ܰ ')  
+end,nil)
 elseif text == 'فتح الانكليزيه' and msg.reply_to_message_id_ == 0 and Manager(msg) then 
-database:del(bot_id..'lock:Fars'..msg.chat_id_) 
+database:del(bot_id..'lock:Engilsh'..msg.chat_id_) 
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 send(msg.chat_id_, msg.id_,'܁༯┆ههلو عمري ↝ ܰ \n܁༯┆تم فتح الانكليزيه ↝ ܰ ')  
 end,nil)
@@ -2474,6 +2505,25 @@ database:del(bot_id.."lock:user:name"..msg.chat_id_)
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
 send(msg.chat_id_, msg.id_,'܁༯┆ههلو عمري ↝ ܰ \n܁༯┆تم فتح المعرفات ↝ ܰ ')  
 end,nil)   
+end
+
+if text == 'تفعيل @all' and CoSu(msg) then   
+if database:get(bot_id..'Cick:all'..msg.chat_id_) then
+Text = ' ⌔┆تم تفعيل امر @all'
+database:del(bot_id..'Cick:all'..msg.chat_id_)  
+else
+Text = ' ⌔┆بالتاكيد تم تفعيل امر @all'
+end
+send(msg.chat_id_, msg.id_,Text) 
+end
+if text == 'تعطيل @all' and CoSu(msg) then  
+if not database:get(bot_id..'Cick:all'..msg.chat_id_) then
+database:set(bot_id..'Cick:all'..msg.chat_id_,true)  
+Text = '\n ⌔┆تم تعطيل امر @all'
+else
+Text = '\n ⌔┆بالتاكيد تم تعطيل امر @all'
+end
+send(msg.chat_id_, msg.id_,Text) 
 end
 if text == 'قفل التاك' and Mod(msg) and msg.reply_to_message_id_ == 0 then 
 database:set(bot_id.."lock:hashtak"..msg.chat_id_,'del')  
@@ -3227,7 +3277,68 @@ t = "٭ 𖤹┆لا يوجد مطوريين ☓◟"
 end
 send(msg.chat_id_, msg.id_, t)
 end
-
+if text == "تاك للمشرفين" or text == "تاك المشرفين" and Manager(msg) then
+if database:get(bot_id.."VVVZVV:admin:Time"..msg.chat_id_) then 
+return
+ send(msg.chat_id_, msg.id_,"انتظر دقيقه من فضلك")
+end
+database:setex(bot_id..'VVVZVV:admin:Time'..msg.chat_id_..':'..msg.sender_user_id_,300,true)
+tdcli_function ({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 100 },function(extra,result,success)
+m = 0
+tgad = 0
+local ans = result.members_  
+for k, v in pairs(ans) do
+tdcli_function({ID="GetUser",user_id_ = v.user_id_},function(arg,data)
+if m == 1 or m == tgad or k == 0 then
+tgad = m + 5
+t = "#Admin"
+end
+m = m + 1
+Adminame = data.first_name_
+Adminame = Adminame:gsub("]","")
+Adminame = Adminame:gsub("[[]","")
+t = t..", ["..Adminame.."](tg://user?id="..v.user_id_..")"
+if m == 1 or m == tgad or k == 0 then
+local Text = t:gsub('#Admin,','#Admin\n')
+sendText(msg.chat_id_,Text,msg.id_/2097152/0.5,'md')
+end
+end,nil)
+end
+end,nil)
+end
+if text == "all" or text == "@all" and CoSu(msg) then
+if not database:get(bot_id..'Cick:all'..msg.chat_id_) then
+if database:get(bot_id.."VVVZVV:all:Time"..msg.chat_id_..':'..msg.sender_user_id_) then  
+return 
+send(msg.chat_id_, msg.id_,"انتظر دقيقه من فضلك")
+end
+database:setex(bot_id..'VVVZVV:all:Time'..msg.chat_id_..':'..msg.sender_user_id_,300,true)
+tdcli_function({ID="GetChannelFull",channel_id_ = msg.chat_id_:gsub('-100','')},function(argg,dataa) 
+tdcli_function({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub('-100',''), offset_ = 0,limit_ = dataa.member_count_},function(ta,amir)
+x = 0
+tags = 0
+local list = amir.members_
+for k, v in pairs(list) do
+tdcli_function({ID="GetUser",user_id_ = v.user_id_},function(arg,data)
+if x == 5 or x == tags or k == 0 then
+tags = x + 5
+t = "#all"
+end
+x = x + 1
+tagname = data.first_name_
+tagname = tagname:gsub("]","")
+tagname = tagname:gsub("[[]","")
+t = t..", ["..tagname.."](tg://user?id="..v.user_id_..")"
+if x == 5 or x == tags or k == 0 then
+local Text = t:gsub('#all,','#all\n')
+sendText(msg.chat_id_,Text,0,'md')
+end
+end,nil)
+end
+end,nil)
+end,nil)
+end
+end
 if text == ("رفع مطور") and msg.reply_to_message_id_ and SudoBot(msg) then
 function start_function(extra, result, success)
 if AddChannel(msg.sender_user_id_) == false then
@@ -6976,7 +7087,7 @@ end
 end
 if text == 'قفل التفليش' and msg.reply_to_message_id_ == 0 and Mod(msg) then 
 database:set(bot_id..'lock:tagrvrbot'..msg.chat_id_,true)   
-list ={"lock:Bot:kick","lock:user:name","lock:Link","lock:forward","lock:Sticker","lock:Animation","lock:Video","lock:Fshar","lock:Fars","Bot:Id:Photo","lock:Audio","lock:vico","lock:Document","lock:Unsupported","lock:Markdaun","lock:Contact","lock:Spam"}
+list ={"lock:Bot:kick","lock:user:name","lock:Link","lock:forward","lock:Sticker","lock:Animation","lock:Video","lock:Fshar","lock:Engilsh","lock:Far","Bot:Id:Photo","lock:Audio","lock:vico","lock:Document","lock:Unsupported","lock:Markdaun","lock:Contact","lock:Spam"}
 for i,lock in pairs(list) do 
 database:set(bot_id..lock..msg.chat_id_,'del')    
 end
@@ -6986,7 +7097,7 @@ end,nil)
 end
 if text == 'فتح التفليش' and msg.reply_to_message_id_ == 0 and Mod(msg) then 
 database:del(bot_id..'lock:tagrvrbot'..msg.chat_id_)   
-list ={"lock:Bot:kick","lock:user:name","lock:Link","lock:forward","lock:Sticker","lock:Animation","lock:Video","lock:Fshar","lock:Fars","Bot:Id:Photo","lock:Audio","lock:vico","lock:Document","lock:Unsupported","lock:Markdaun","lock:Contact","lock:Spam"}
+list ={"lock:Bot:kick","lock:user:name","lock:Link","lock:forward","lock:Sticker","lock:Animation","lock:Video","lock:Fshar","lock:Engilsh","lock:Far","Bot:Id:Photo","lock:Audio","lock:vico","lock:Document","lock:Unsupported","lock:Markdaun","lock:Contact","lock:Spam"}
 for i,lock in pairs(list) do 
 database:del(bot_id..lock..msg.chat_id_)    
 end
@@ -9161,6 +9272,7 @@ Text = [[
 ┤ ردود المدير
 ┤ الردود
 ┘ صورتي
+تعطيل ~⪼ تفعيل @all
 ܀⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤܀
 𖤂┆[CHanneL SourcE](t.me/R_IQ9) 𖥠 .
 ]]
