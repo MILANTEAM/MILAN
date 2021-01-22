@@ -210,6 +210,14 @@ else
 return false    
 end 
 end
+function cleaner(msg)
+local hash = database:sismember(bot_id.."VVVZVV:MN:TF"..msg.chat_id_,msg.sender_user_id_)    
+if hash or SudoBot(msg) or Sudo(msg) or BasicConstructor(msg) or CoSu(msg) then     
+return true    
+else    
+return false    
+end 
+end
 function Mod(msg)
 local hash = database:sismember(bot_id..'Mod:User'..msg.chat_id_,msg.sender_user_id_)    
 if hash or SudoBot(msg) or Sudo(msg) or BasicConstructor(msg) or Constructor(msg) or Manager(msg) then    
@@ -242,6 +250,8 @@ var = true
 elseif database:sismember(bot_id..'Constructor'..chat_id, user_id) then
 var = true  
 elseif database:sismember(bot_id..'Manager'..chat_id, user_id) then
+var = true  
+elseif database:sismember(bot_id..'VVVZVV:MN:TF'..chat_id, user_id) then
 var = true  
 elseif database:sismember(bot_id..'Mod:User'..chat_id, user_id) then
 var = true  
