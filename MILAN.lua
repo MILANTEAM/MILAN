@@ -7614,7 +7614,54 @@ send(msg.chat_id_, msg.id_,"܁༯┆ارسل الي الاسم الان ↝ ܰ "
 end
 return false
 end
-
+if text == ("امسح") and cleaner(msg) then  
+local list = database:smembers(bot_id.."VVVZVV:allM"..msg.chat_id_)
+for k,v in pairs(list) do
+local Message = v
+if Message then
+t = "⌔┆تم مسح "..k.." من الوسائط الموجوده"
+DeleteMessage(msg.chat_id_,{[0]=Message})
+database:del(bot_id.."VVVZVV:allM"..msg.chat_id_)
+end
+end
+if #list == 0 then
+t = "⌔┆لا يوجد ميديا في المجموعه"
+end
+send(msg.chat_id_, msg.id_, t)
+end
+if text == ("عدد الميديا") and cleaner(msg) then  
+local num = database:smembers(bot_id.."VVVZVV:allM"..msg.chat_id_)
+for k,v in pairs(num) do
+local numl = v
+if numl then
+l = "⌔┆عدد الميديا الموجود هو "..k
+end
+end
+if #num == 0 then
+l = "⌔┆لا يوجد ميديا في المجموعه"
+end
+send(msg.chat_id_, msg.id_, l)
+end
+if text == "تنظيف التعديل" and Manager(msg) then
+Msgs = {[0]=msg.id_}
+local Message = msg.id_
+for i=1,100 do
+Message = Message - 1048576
+Msgs[i] = Message
+end
+tdcli_function({ID = "GetMessages",chat_id_ = msg.chat_id_,message_ids_ = Msgs},function(arg,data)
+new = 0
+Msgs2 = {}
+for i=0 ,data.total_count_ do
+if data.messages_[i] and (not data.messages_[i].edit_date_ or data.messages_[i].edit_date_ ~= 0) then
+Msgs2[new] = data.messages_[i].id_
+new = new + 1
+end
+end
+DeleteMessage(msg.chat_id_,Msgs2)
+end,nil)  
+send(msg.chat_id_, msg.id_,'⌔┆تم تنظيف جميع الرسائل المعدله')
+end
 if text == ""..(database:get(bot_id..'Name:Bot') or 'اسو').."" then  
 Namebot = (database:get(bot_id..'Name:Bot') or 'اسو')
 local MILAN_Msg = {
