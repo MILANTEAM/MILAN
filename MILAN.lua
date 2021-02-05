@@ -7598,22 +7598,6 @@ msgm = msgm - 1048576
 end
 send(msg.chat_id_,msg.id_,'┐ هلو عمري ↝ ٭ \n┘ تم تنظيف ◞ ['..num..'](t.me/R_IQ9) ◜ رسالة ✓ ٭')
 end
-if text == "تغير اسم البوت" or text == "تغيير اسم البوت" then 
-if SudoBot(msg) then
-if AddChannel(msg.sender_user_id_) == false then
-local textchuser = database:get(bot_id..'text:ch:user')
-if textchuser then
-send(msg.chat_id_, msg.id_,'['..textchuser..']')
-else
-send(msg.chat_id_, msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• اشترك اولا ['..database:get(bot_id..'add:ch:username')..'⚜️]')
-end
-return false
-end
-database:setex(bot_id..'Set:Name:Bot'..msg.sender_user_id_,300,true) 
-send(msg.chat_id_, msg.id_,"܁༯┆ارسل الي الاسم الان ↝ ܰ ")  
-end
-return false
-end
 if text == ("امسح") and cleaner(msg) then  
 local list = database:smembers(bot_id.."VVVZVV:allM"..msg.chat_id_)
 for k,v in pairs(list) do
@@ -7642,26 +7626,24 @@ l = "⌔┆لا يوجد ميديا في المجموعه"
 end
 send(msg.chat_id_, msg.id_, l)
 end
-if text == "تنظيف التعديل" and Manager(msg) then
-Msgs = {[0]=msg.id_}
-local Message = msg.id_
-for i=1,100 do
-Message = Message - 1048576
-Msgs[i] = Message
+
+if text == "تغير اسم البوت" or text == "تغيير اسم البوت" then 
+if SudoBot(msg) then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'• اهلا بك عزيزي 🔱 •\n• لايمكنك استخدام البوت ✅ •\n• عليك الاشتراك في القناة 🔽 •\n• اشترك اولا ['..database:get(bot_id..'add:ch:username')..'⚜️]')
 end
-tdcli_function({ID = "GetMessages",chat_id_ = msg.chat_id_,message_ids_ = Msgs},function(arg,data)
-new = 0
-Msgs2 = {}
-for i=0 ,data.total_count_ do
-if data.messages_[i] and (not data.messages_[i].edit_date_ or data.messages_[i].edit_date_ ~= 0) then
-Msgs2[new] = data.messages_[i].id_
-new = new + 1
+return false
 end
+database:setex(bot_id..'Set:Name:Bot'..msg.sender_user_id_,300,true) 
+send(msg.chat_id_, msg.id_,"܁༯┆ارسل الي الاسم الان ↝ ܰ ")  
 end
-DeleteMessage(msg.chat_id_,Msgs2)
-end,nil)  
-send(msg.chat_id_, msg.id_,'⌔┆تم تنظيف جميع الرسائل المعدله')
+return false
 end
+
 if text == ""..(database:get(bot_id..'Name:Bot') or 'اسو').."" then  
 Namebot = (database:get(bot_id..'Name:Bot') or 'اسو')
 local MILAN_Msg = {
