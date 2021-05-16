@@ -251,8 +251,6 @@ elseif database:sismember(bot_id..'Constructor'..chat_id, user_id) then
 var = true  
 elseif database:sismember(bot_id..'Manager'..chat_id, user_id) then
 var = true
-elseif database:sismember(bot_id..'VVVZVV:MN:TF'..chat_id, user_id) then
-var = true
 elseif database:sismember(bot_id..'Mod:User'..chat_id, user_id) then
 var = true  
 elseif database:sismember(bot_id..'Special:User'..chat_id, user_id) then  
@@ -284,8 +282,6 @@ elseif database:sismember(bot_id..'Constructor'..chat_id, user_id) then
 var = database:get(bot_id.."Constructor:Rd"..msg.chat_id_) or 'المنشئ'  
 elseif database:sismember(bot_id..'Manager'..chat_id, user_id) then
 var = database:get(bot_id.."Manager:Rd"..msg.chat_id_) or 'المدير'  
-elseif database:sismember(bot_id..'VVVZVV:MN:TF'..chat_id, user_id) then
-var = 'منظف' 
 elseif database:sismember(bot_id..'Mod:User'..chat_id, user_id) then
 var = database:get(bot_id.."Mod:Rd"..msg.chat_id_) or 'الادمن'  
 elseif database:sismember(bot_id..'Mamez:User', user_id) then
@@ -7596,41 +7592,6 @@ local msgm = msg.id_
 for i=1,tonumber(num) do
 DeleteMessage(msg.chat_id_, {[0] = msgm})
 msgm = msgm - 1048576
-end
-send(msg.chat_id_,msg.id_,'⌔︙تم حذف {'..num..'}')  
-database:setex(bot_id..'VVVZVV:Delete:Time'..msg.chat_id_..':'..msg.sender_user_id_,300,true)
-end
-end
-if (msg.content_.animation_) or (msg.content_.photo_) or (msg.content_.video_) or (msg.content_.document) or (msg.content_.sticker_) and msg.reply_to_message_id_ == 0 then
-database:sadd(bot_id.."VVVZVV:allM"..msg.chat_id_, msg.id_)
-end
-if text == ("امسح") and cleaner(msg) then  
-local list = database:smembers(bot_id.."VVVZVV:allM"..msg.chat_id_)
-for k,v in pairs(list) do
-local Message = v
-if Message then
-t = "⌔︙تم مسح "..k.." من الوسائط الموجوده"
-DeleteMessage(msg.chat_id_,{[0]=Message})
-database:del(bot_id.."VVVZVV:allM"..msg.chat_id_)
-end
-end
-if #list == 0 then
-t = "⌔︙لا يوجد ميديا في المجموعه"
-end
-send(msg.chat_id_, msg.id_, t)
-end
-if text == ("عدد الميديا") and cleaner(msg) then  
-local num = database:smembers(bot_id.."VVVZVV:allM"..msg.chat_id_)
-for k,v in pairs(num) do
-local numl = v
-if numl then
-l = "⌔︙عدد الميديا الموجود هو "..k
-end
-end
-if #num == 0 then
-l = "⌔︙لا يوجد ميديا في المجموعه"
-end
-send(msg.chat_id_, msg.id_, l)
 end
 if text == "تغير اسم البوت" or text == "تغيير اسم البوت" then 
 if SudoBot(msg) then
