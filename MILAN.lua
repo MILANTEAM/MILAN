@@ -2475,6 +2475,24 @@ tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,dat
 send(msg.chat_id_, msg.id_,'܁༯┆ههلو عمري ↝ ܰ \n܁༯┆تم فتح المعرفات ↝ ܰ ')  
 end,nil)   
 end
+if text == 'تفعيل @all' and CoSu(msg) then   
+if database:get(bot_id..'Cick:all'..msg.chat_id_) then
+Text = ' ⌔︙تم تفعيل امر @all'
+database:del(bot_id..'Cick:all'..msg.chat_id_)  
+else
+Text = ' ⌔︙بالتاكيد تم تفعيل امر @all'
+end
+send(msg.chat_id_, msg.id_,Text) 
+end
+if text == 'تعطيل @all' and CoSu(msg) then  
+if not database:get(bot_id..'Cick:all'..msg.chat_id_) then
+database:set(bot_id..'Cick:all'..msg.chat_id_,true)  
+Text = '\n ⌔︙تم تعطيل امر @all'
+else
+Text = '\n ⌔︙بالتاكيد تم تعطيل امر @all'
+end
+send(msg.chat_id_, msg.id_,Text) 
+end
 if text == 'قفل التاك' and Mod(msg) and msg.reply_to_message_id_ == 0 then 
 database:set(bot_id.."lock:hashtak"..msg.chat_id_,'del')  
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
@@ -3226,6 +3244,39 @@ if #list == 0 then
 t = "٭ 𖤹┆لا يوجد مطوريين ☓◟"
 end
 send(msg.chat_id_, msg.id_, t)
+end
+if text == "all" or text == "@all" and CoSu(msg) then
+if not database:get(bot_id..'Cick:all'..msg.chat_id_) then
+if database:get(bot_id.."VVVZVV:all:Time"..msg.chat_id_..':'..msg.sender_user_id_) then  
+return 
+send(msg.chat_id_, msg.id_,"انتظر دقيقه من فضلك")
+end
+database:setex(bot_id..'VVVZVV:all:Time'..msg.chat_id_..':'..msg.sender_user_id_,300,true)
+tdcli_function({ID="GetChannelFull",channel_id_ = msg.chat_id_:gsub('-100','')},function(argg,dataa) 
+tdcli_function({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub('-100',''), offset_ = 0,limit_ = dataa.member_count_},function(ta,amir)
+x = 0
+tags = 0
+local list = amir.members_
+for k, v in pairs(list) do
+tdcli_function({ID="GetUser",user_id_ = v.user_id_},function(arg,data)
+if x == 5 or x == tags or k == 0 then
+tags = x + 5
+t = "#all"
+end
+x = x + 1
+tagname = data.first_name_
+tagname = tagname:gsub("]","")
+tagname = tagname:gsub("[[]","")
+t = t..", ["..tagname.."](tg://user?id="..v.user_id_..")"
+if x == 5 or x == tags or k == 0 then
+local Text = t:gsub('#all,','#all\n')
+sendText(msg.chat_id_,Text,0,'md')
+end
+end,nil)
+end
+end,nil)
+end,nil)
+end
 end
 
 if text == ("رفع مطور") and msg.reply_to_message_id_ and SudoBot(msg) then
@@ -8461,7 +8512,20 @@ Text = '\n܁༯┆ههلو عمري ↝ ܰ \n܁༯┆تم تعطيل امر اط
 end
 send(msg.chat_id_, msg.id_,Text) 
 end
-
+if text == "صورتي"  then
+local my_ph = database:get(bot_id.."my_photo:status"..msg.chat_id_)
+if not my_ph then
+send(msg.chat_id_, msg.id_," ⌔┆الصوره معطله") 
+return false  
+end
+local function getpro(extra, result, success)
+if result.photos_[0] then
+sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil, result.photos_[0].sizes_[1].photo_.persistent_id_," ⌔┆عدد صورك ~⪼ "..result.total_count_.." صوره‌‏", msg.id_, msg.id_, "md")
+else
+send(msg.chat_id_, msg.id_,'لا تمتلك صوره في حسابك', 1, 'md')
+  end end
+tdcli_function ({ ID = "GetUserProfilePhotos", user_id_ = msg.sender_user_id_, offset_ = 0, limit_ = 1 }, getpro, nil)
+end
 if text == 'كلايش ايدي' and Mod(msg) then 
 send(msg.chat_id_, msg.id_,'1-`.𖣂 𝙪𝙨𝙚𝙧𝙣𝙖𝙢𝙚 , #username \n.𖣂 𝙨𝙩𝙖𝙨𝙩 , #stast \n.𖣂 𝙡𝘿 , #id \n.𖣂 𝙂𝙖𝙢𝙨 , #game \n. 𖣂 𝙢𝙨𝙂𝙨 , #msgs`\n2- `- 𓏬 𝐔𝐬𝐄𝐫 : #username 𓂅 .\n- 𓏬 𝐌𝐬𝐆  : #msgs 𓂅 .\n- ?? 𝐒??𝐀 : #stast 𓂅 .\n- 𓏬 𝐈𝐃 : #id 𓂅 .`\n3- `☆•𝐮𝐬𝐞𝐫 : #username 𖣬  \n☆•𝐦𝐬𝐠  : #msgs 𖣬 \n☆•𝐬𝐭𝐚 : #stast 𖣬 \n☆•𝐢𝐝  : #id 𖣬`')
 end
